@@ -1,30 +1,66 @@
 # Casem
 
-The goal of this project is to reimplement the [Cirrina](https://github.com/CollaborativeStateMachines/Cirrina/) Runtime in Go. 
-This new Runtime (Casem) should provide all features of the Cirrina Runtime as well as a programatic API to develop and compile StateMachines. 
-Therefore this project is made up of multiple milestones:
+The goal of this project is to reimplement the [**Cirrina**](https://github.com/CollaborativeStateMachines/Cirrina/) runtime in Go. 
+The new runtime, **Casem** should extend the existing the functionality of Cirrina by providing a programmatic API to develop state machines enabling it to:
+
+* Run state machines from .pkl files
+* Compile state machines from the API to native binaries
+* Compile state machines from the API to WebAssembly
 
 ## Development of Casem
 
-The initial step is to port the Cirrina Runtime from Kotlin to Go with all it's existing features and the possibility to run StateMachines written in the CSML language via pkl files. 
+The first step is to port the Cirrina Runtime from Kotlin to Go with all existing features and the possibility to run state machines via `.pkl files. 
 
-### Comparison Cirrina (Kotlin) vs Casem (Go)
+### Comparison: Cirrina (.pkl) vs Casem (.pkl)
 
-After Casem is developed a performance comparison between Cirrina and Casem would be neccessary. 
-For this purpose there already exist a couple of benchmarks and use case examples at [Cirrina-Examples](https://github.com/CollaborativeStateMachines/Cirrina-Examples). 
-This examples are written in pkl files an can therefore be used for Cirrina and Casem as is.
+Once Casem is developed a performance comparison between Cirrina and Casem will be necessary. 
+A set of well-known benchmarks is already available at [Cirrina-Examples](https://github.com/CollaborativeStateMachines/Cirrina-Examples). 
+These benchmarks are written in .pkl files and can therefore be used unchanged for both Cirrina and Casem, providing a fair comparison between the two runtimes.
 
 ## Programmatic API for Casem
 
-The next step would be to create a programmatic API for Casem to develop and run StateMachines. This would enable to embed the StateMachines into the final binary instead of parsing them as pkl files on application startup.
+The next step is to create Casem’s programmatic API, which allows developers to define state machines in Go and compile them to either native binaries or WebAssembly.
 
-### Comparison Casem (Pkl) vs Casem (Naitive)
+### Comparison: Casem (.pkl) vs Casem (API)
 
-Finally a performance comparison between StateMachines that are implemented in 
+At last a performance comparison between running state machines with casem that are implemented via:
 
-* pkl files (parsed at startup of Casem runtime)
-* programmatic API (embedded in binary)
+* .pkl files
+* the programmatic API
 
-Therefore again the benchmarks and use cases from the Cirrina-Examples can be used.
+For this evaluation the benchmarks of the Cirrina-Examples can be used again. 
 
+## Conclusion
 
+Finally, there will be multiple ways to run and develop state machines based on the exact requirements:
+
+<table>
+  <tr>
+    <th></th>
+    <th style="text-align:center" colspan="2">Cirrina</th>
+    <th style="text-align:center" colspan="2">Casem</th>
+  </tr>
+  <tr>
+    <td>Language</td>
+    <td style="text-align:center" colspan="2">Kotlin</td>
+    <td style="text-align:center" colspan="2">Go</td>
+  </tr>
+  <tr>
+    <td>Execution</td>
+    <td style="text-align:center">JVM</td>
+    <td style="text-align:center">Docker + JVM</td>
+    <td style="text-align:center">Naitive Binary</td>
+    <td style="text-align:center">WASM Runtime</td>
+  </tr>
+  <tr>
+    <td>State Machines</td>
+    <td style="text-align:center" colspan="2">.pkl</td>
+    <td style="text-align:center">.pkl</td>
+    <td style="text-align:center">API</td>
+  </tr>
+  <tr>
+    <td >Containerization</td>
+    <td style="text-align:center" colspan="2">Docker</td>
+    <td style="text-align:center" colspan="2">WASM Runtime</td>
+  </tr>
+</table>
